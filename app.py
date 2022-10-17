@@ -1,3 +1,4 @@
+from tracemalloc import start
 import streamlit as st
 import pickle
 from script import Graph
@@ -48,3 +49,11 @@ If you are interested in seeing the project grow, please star the project, it wi
     """)
     st.markdown("""
     #### [Github](https://github.com/ishandandekar/Bifrost)""")
+
+with col2:
+    st.markdown("""
+    ### See the route for yourself!""")
+    network = load_network()
+    nodes = network.vertices_
+    start = st.selectbox("Select a start point", nodes)
+    end = st.selectbox("Select an end point", nodes)
