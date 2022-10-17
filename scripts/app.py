@@ -54,8 +54,8 @@ with col2:
     ### See the route for yourself!""")
     network = load_network()
     nodes = network.vertices_
-    start = st.selectbox("Select a start point", nodes)
-    end = st.selectbox("Select an end point", nodes)
+    start = st.selectbox("Select a start point", nodes, index=2)
+    end = st.selectbox("Select an end point", nodes, index=65)
 
     path = network.a_star_algorithm(start, end)
     if path == None:
