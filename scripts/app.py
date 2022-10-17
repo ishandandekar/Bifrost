@@ -1,4 +1,3 @@
-from tracemalloc import start
 import streamlit as st
 import pickle
 from script import Graph
@@ -57,3 +56,9 @@ with col2:
     nodes = network.vertices_
     start = st.selectbox("Select a start point", nodes)
     end = st.selectbox("Select an end point", nodes)
+
+    path = network.a_star_algorithm(start, end)
+    if path == None:
+        st.error("Path Not Found!")
+    else:
+        st.success(path)

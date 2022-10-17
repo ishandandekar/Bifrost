@@ -33,11 +33,14 @@ class Graph:
         else:
             raise KeyError(f'{vertex} not present as a vertex in database')
 
+    def _get_adjacency_list(self, vertex: str) -> list:
+        return self.vert_neigh_dict[vertex]
+
     def _h(self, node: str):
         H = {vertex: 1 for vertex in self.vertices}
         return H[node]
 
-    def _a_star_algorithm(self, start, end):
+    def a_star_algorithm(self, start: str, end: str):
         open_list = set([start])
         closed_list = set([])
         g = {}
@@ -67,11 +70,9 @@ class Graph:
                 reconst_path.append(end)
 
                 reconst_path.reverse()
-
-# ->            # Change return list and remove print statement
-                print('Path found: {}'.format(reconst_path))
+                # print('Path found: {}'.format(reconst_path))
                 return reconst_path
-            for (m, weight) in self.get_neighbours(n):
+            for (m, weight) in self._get_adjacency_list(n):
                 if m not in open_list and m not in closed_list:
                     open_list.add(m)
                     parents[m] = n
@@ -88,7 +89,7 @@ class Graph:
             closed_list.add(n)
 
 # ->    # Change return and remove print statement
-        print('Path does not exist!')
+        # print('Path does not exist!')
         return None
 
 
@@ -263,8 +264,8 @@ if __name__ == '__main__':
     graph.add_relation("Sant Gadge Maharaj Chowk", "Lower Parel", 2)
     graph.add_relation("Lower Parel", "Mint Colony", 2)
     graph.add_relation("Mint Colony", "Ambedkar Nagar", 3)
-    graph.add_relation("Ambedkar Nagar", "Naigaon", 3)
-    graph.add_relation("Naigaon", "Dadar East", 2)
+    graph.add_relation("Ambedkar Nagar", "Naigaon (near Dadar)", 3)
+    graph.add_relation("Naigaon (near Dadar)", "Dadar East", 2)
     graph.add_relation("Dadar East", "Wadala Bridge", 3)
     graph.add_relation("Wadala Bridge", "Acharya Atre Nagar", 3)
     graph.add_relation("Acharya Atre Nagar", "Antop Hill", 2)
