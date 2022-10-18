@@ -71,6 +71,7 @@ class Graph:
 
                 reconst_path.reverse()
                 # print('Path found: {}'.format(reconst_path))
+                reconst_path[0] = start
                 return reconst_path
             for (m, weight) in self._get_adjacency_list(n):
                 if m not in open_list and m not in closed_list:
