@@ -56,7 +56,7 @@ with col2:
     st.markdown("""
     ### See the route for yourself!""")
     network = load_network()
-    nodes = network.vertices_
+    nodes = sorted(network.vertices_)
     start = st.selectbox("Select a start point", nodes, index=2)
     end = st.selectbox("Select an end point", nodes, index=65)
 
