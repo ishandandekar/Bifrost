@@ -1,6 +1,6 @@
 import streamlit as st
 import pickle
-from script import Graph
+from dev_script import Graph
 
 
 @st.cache(allow_output_mutation=True)
@@ -57,8 +57,10 @@ with col2:
     start = st.selectbox("Select a start point", nodes, index=2)
     end = st.selectbox("Select an end point", nodes, index=65)
 
-    path = network.a_star_algorithm(start, end)
+    path, time_taken = network.a_star_algorithm(start, end)
     if path == None:
         st.error("Path Not Found!")
     else:
         st.success(path)
+        st.info(
+            f'Time taken by this path is: {round(time_taken/60)} hours and {time_taken%60} minutes')

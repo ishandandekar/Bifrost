@@ -72,7 +72,15 @@ class Graph:
                 reconst_path.reverse()
                 # print('Path found: {}'.format(reconst_path))
                 reconst_path[0] = start
-                return reconst_path
+
+                time_duration = 0
+                for node in reconst_path:
+                    if node == end:
+                        break
+                    for neighbour, time in self._get_adjacency_list(node):
+                        if neighbour == reconst_path[reconst_path.index(node) + 1]:
+                            time_duration += time
+                return reconst_path, time_duration
             for (m, weight) in self._get_adjacency_list(n):
                 if m not in open_list and m not in closed_list:
                     open_list.add(m)
