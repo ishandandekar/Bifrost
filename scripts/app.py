@@ -1,6 +1,6 @@
 import streamlit as st
 import pickle
-from dev_script import Graph
+from script import Graph
 
 
 @st.cache(allow_output_mutation=True)
