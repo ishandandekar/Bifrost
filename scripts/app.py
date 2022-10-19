@@ -4,13 +4,11 @@ from script import Graph
 import os
 
 BASE_DIR = os.getcwd()
-st.info(BASE_DIR)
-st.info(f"{os.listdir(BASE_DIR)}")
 
 
-# @st.cache(allow_output_mutation=True)
+@st.cache(allow_output_mutation=True)
 def load_network() -> Graph:
-    with open(f"{os.path.join(BASE_DIR, 'network.pkl')}", 'rb') as f:
+    with open(f"{os.path.join(os.path.join(BASE_DIR,'scripts'), 'network.pkl')}", 'rb') as f:
         network = pickle.load(f)
     return network
 
