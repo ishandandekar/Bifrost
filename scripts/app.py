@@ -65,5 +65,9 @@ with col2:
         st.error("Path Not Found!")
     else:
         st.success(path)
-        st.info(
-            f'Time taken by this path is: {round(time_taken/60)} hours and {time_taken%60} minutes')
+        if time_taken < 60:
+            st.info(
+                f'Time taken by this path is: {time_taken} minutes')
+        else:
+            st.info(
+                f"Time taken by this path is: {time_taken/60} hour(s) and {time_taken%60} minutes")
