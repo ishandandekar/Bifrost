@@ -1,14 +1,31 @@
 # Contains the main graph which acts as a database
-from typing import Dict, List, Tuple
+from typing import Dict, List, Tuple, Union
 import pickle
 
 
 class Graph:
+    """
+    Representing a **bidirectional Graph data structure**
+    """
+
     def __init__(self) -> None:
+        """
+        Function called when object is instantiated,
+        Sets up a list for vertices and a dictionary representing,
+        adjacency list for each node
+        """
         self.vertices: list = []
         self.vert_neigh_dict: Dict[str, List[Tuple[str, int]]] = {}
 
     def add_relation(self, start: str, end: str, time: int) -> None:
+        """
+        Adds a relation between two nodes
+
+        Args:
+            start (str): Node which represents the start of the direction
+            end (str): Node which represents the end of the direction
+            time (int): Time taken to reach `end` from `start` in minutes
+        """
         if start not in self.vertices:
             self.vertices.append(start)
         if end not in self.vertices:
@@ -25,22 +42,70 @@ class Graph:
 
     @property
     def vertices_(self) -> list:
+        """Returns a list of all the vertices in the network
+
+        Returns:
+            list: _description_
+        """
         return self.vertices
 
     def get_neighbours(self, vertex: str) -> list:
+        """Returns the neighbours of a vertex
+
+        Args:
+            vertex (str): Represents a vertex present in the network
+
+        Raises:
+            KeyError: Is raised when the `vertex` is not registered in the database
+
+        Returns:
+            list: Represents the neighbours of the `vertex`
+        """
         if vertex in self.vertices:
             return [neighbour for neighbour, time in self.vert_neigh_dict[vertex]]
         else:
             raise KeyError(f'{vertex} not present as a vertex in database')
 
     def _get_adjacency_list(self, vertex: str) -> list:
-        return self.vert_neigh_dict[vertex]
+        """Helper function which returns the adjacency list of the vertex
 
-    def _h(self, node: str):
+        Args:
+            vertex (str): Represents a node in the network
+
+        Raises:
+            KeyError: Raised when `vertex` is not registered in database
+
+        Returns:
+            list: Represents the adjacency list of the `vertex`
+        """
+        if vertex in self.vertices:
+            return self.vert_neigh_dict[vertex]
+        else:
+            raise KeyError(f'{vertex} not present as a vertex in database')
+
+    def _h(self, node: str) -> int:
+        """Helper function which returns the value of the heurestic function for a node
+
+        Args:
+            node (str): Represents a node in the database
+
+        Returns:
+            int: Value of the heurestic function
+        """
         H = {vertex: 1 for vertex in self.vertices}
         return H[node]
 
-    def a_star_algorithm(self, start: str, end: str):
+    def a_star_algorithm(self, start: str, end: str) -> Union[Tuple[List[str], int], None]:
+        """
+        Performs A-star search algorithm to find the shortest path
+
+        Args:
+            start (str): Represents the start of the journey
+            end (str): Represents the destination of the journey
+
+        Returns:
+            Union[Tuple[List[str], int], None]: Returns the path (as a list) and the time taken to traverse the path, or returns None, if no path is found
+        """
         open_list = set([start])
         closed_list = set([])
         g = {}
@@ -56,8 +121,6 @@ class Graph:
                     n = v
 
             if n == None:
-             # ->           # return string
-                # print('Path does not exist!')
                 return None
 
             if n == end:
@@ -70,7 +133,6 @@ class Graph:
                 reconst_path.append(end)
 
                 reconst_path.reverse()
-                # print('Path found: {}'.format(reconst_path))
                 reconst_path[0] = start
 
                 time_duration = 0
@@ -97,8 +159,6 @@ class Graph:
             open_list.remove(n)
             closed_list.add(n)
 
-# ->    # Change return and remove print statement
-        # print('Path does not exist!')
         return None
 
 
