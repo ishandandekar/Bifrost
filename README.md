@@ -1,6 +1,6 @@
 # BiFrost
 
-:wave: Hello and welcome to **BiFrost ** code repository. This is a short and simple Artificial Intelligence project. **BiFrost** helps to make your commute easier by showing you the shortest route to take from your start to your destination.
+:wave: Hello and welcome to **BiFrost** code repository. This is a short and simple Artificial Intelligence project. **BiFrost** helps to make your commute easier by showing you the shortest route to take from your start to your destination.
 
 ## Introduction
 
