@@ -70,4 +70,4 @@ with col2:
                 f'Time taken by this path is: {time_taken} minutes')
         else:
             st.info(
-                f"Time taken by this path is: {time_taken/60} hour(s) and {time_taken%60} minutes")
+                f"Time taken by this path is: {time_taken//60} hour(s) and {time_taken%60} minutes")
