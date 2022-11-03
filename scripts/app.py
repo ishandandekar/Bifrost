@@ -7,8 +7,12 @@ BASE_DIR = os.getcwd()
 
 
 @st.cache(allow_output_mutation=True)
+# def load_network() -> Graph:
+#     with open(f"{os.path.join(os.path.join(BASE_DIR,'scripts'), 'network.pkl')}", 'rb') as f:
+#         network = pickle.load(f)
+#     return network
 def load_network() -> Graph:
-    with open(f"{os.path.join(os.path.join(BASE_DIR,'scripts'), 'network.pkl')}", 'rb') as f:
+    with open('network.pkl', 'rb') as f:
         network = pickle.load(f)
     return network
 
@@ -67,7 +71,7 @@ with col2:
         st.success(path)
         if time_taken < 60:
             st.info(
-                f'Time taken by this path is: {time_taken} minutes')
+                """**Time taken by this path is: {time_taken} minutes**""")
         else:
             st.info(
-                f"Time taken by this path is: {time_taken//60} hour(s) and {time_taken%60} minutes")
+                f"**Time taken by this path is: {time_taken//60} hour(s) and {time_taken%60} minutes**")
