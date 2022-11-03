@@ -14,3 +14,5 @@ We did this project as a part of our bachelor's degree for the Applied AI subjec
 This project has been commenced under the [MIT License](LICENSE). Thus, making it open source.  
 The project is still in its development phases and the developer(s) are always looking for improvements. If you want to contribute to this project in any sort of, please make a pull-request with the improved code and/or documentation.  
 If you are interested in seeing the project grow, please star the project, it will be really motivating for us!
+
+> **Note** : You can replicate the python environment using the [requirements.txt](requirements.txt) present in the code repository.
