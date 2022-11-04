@@ -64,7 +64,7 @@ class Graph:
         if vertex in self.vertices:
             return [neighbour for neighbour, time in self.vert_neigh_dict[vertex]]
         else:
-            raise KeyError(f'{vertex} not present as a vertex in database')
+            raise KeyError(f'{vertex} not present as a vertex in data')
 
     def _get_adjacency_list(self, vertex: str) -> list:
         """Helper function which returns the adjacency list of the vertex
@@ -82,18 +82,6 @@ class Graph:
             return self.vert_neigh_dict[vertex]
         else:
             raise KeyError(f'{vertex} not present as a vertex in database')
-
-    def _h(self, node: str) -> int:
-        """Helper function which returns the value of the heurestic function for a node
-
-        Args:
-            node (str): Represents a node in the database
-
-        Returns:
-            int: Value of the heurestic function
-        """
-        H = {vertex: 1 for vertex in self.vertices}
-        return H[node]
 
     def a_star_algorithm(self, start: str, end: str) -> Union[Tuple[List[str], int], None]:
         """
@@ -117,11 +105,11 @@ class Graph:
         while len(open_list) > 0:
             n = None
             for v in open_list:
-                if n == None or g[v] + self._h(v) < g[n] + self._h(n):
+                if n == None or g[v] < g[n]:
                     n = v
 
-            if n == None:
-                return None
+            # if n == None:
+            #     return None
 
             if n == end:
                 reconst_path = []
@@ -347,6 +335,10 @@ if __name__ == '__main__':
     graph.add_relation("Fertiliser Township", "VNP Marg Junction", 2)
     graph.add_relation("VNP Marg Junction", "Chembur", 3)
 
-    with open('network.pkl', 'wb') as f:
-        pickle.dump(graph, f)
-    print("Dump completed.")
+    # with open('network.pkl', 'wb') as f:
+    #     pickle.dump(graph, f)
+    # print("Dump completed.")
+
+    path, time = graph.a_star_algorithm('Andheri', 'Santacruz')
+    print(path)
+    print(time)
