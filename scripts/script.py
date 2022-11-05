@@ -1,6 +1,7 @@
 # Contains the main graph which acts as a database
 from typing import Dict, List, Tuple, Union
 import pickle
+from queue import PriorityQueue
 
 
 class Graph:
@@ -113,60 +114,20 @@ class Graph:
         Returns:
             Union[Tuple[List[str], int], None]: Returns the path (as a list) and the time taken to traverse the path, or returns None, if no path is found
         """
-        open_list = set([start])
-        closed_list = set([])
-        g = {}
+        pq = PriorityQueue()
+        pq.put((0, start))
+        visited = {}
+        visited[start] = 1
+        g_dist = {}
 
-        g[start] = 0
-        parents = {}
-        parents[start] = start
+        while not pq.empty():
+            element = pq.get(1)
 
-        while len(open_list) > 0:
-            n = None
-            for v in open_list:
-                if n == None or g[v] + self._h(v) < g[n] + self._h(n):
-                    n = v
+            if element == end:
+                break
 
-            if n == None:
-                return None
-
-            if n == end:
-                reconst_path = []
-
-                while parents[n] != n:
-                    reconst_path.append(n)
-                    n = parents[n]
-
-                reconst_path.append(end)
-
-                reconst_path.reverse()
-                reconst_path[0] = start
-
-                time_duration = 0
-                for node in reconst_path:
-                    if node == end:
-                        break
-                    for neighbour, time in self._get_adjacency_list(node):
-                        if neighbour == reconst_path[reconst_path.index(node) + 1]:
-                            time_duration += time
-                return reconst_path, time_duration
-            for (m, weight) in self._get_adjacency_list(n):
-                if m not in open_list and m not in closed_list:
-                    open_list.add(m)
-                    parents[m] = n
-                    g[m] = g[n] + weight
-                else:
-                    if g[m] > g[n] + weight:
-                        g[m] = g[n] + weight
-                        parents[m] = n
-
-                        if m in closed_list:
-                            closed_list.remove(m)
-                            open_list.add(m)
-            open_list.remove(n)
-            closed_list.add(n)
-
-        return None
+            for neighbour, time in self._get_adjacency_list[element]:
+                if visited[neighbour] != 1:
 
 
 if __name__ == '__main__':
