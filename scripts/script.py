@@ -335,10 +335,6 @@ if __name__ == '__main__':
     graph.add_relation("Fertiliser Township", "VNP Marg Junction", 2)
     graph.add_relation("VNP Marg Junction", "Chembur", 3)
 
-    # with open('network.pkl', 'wb') as f:
-    #     pickle.dump(graph, f)
-    # print("Dump completed.")
-
-    path, time = graph.a_star_algorithm('Andheri', 'Santacruz')
-    print(path)
-    print(time)
+    with open('network.pkl', 'wb') as f:
+        pickle.dump(graph, f)
+    print("Dump completed.")
