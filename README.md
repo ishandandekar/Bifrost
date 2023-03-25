@@ -9,6 +9,11 @@ In the early development stages, we used Mumbai(Maharashtra, India) and Navi Mum
 This network of railway, is imitated as a **Graph** data structure. This made it easier to add the nodes (or stops/destinations). Further, if there is any development on creating better lines for transportation, adding to the network will be very easy.
 We did this project as a part of our bachelor's degree for the Applied AI subject.
 
+## Logs:
+
+- Version 2: Add new metro lines 2A (Andheri West - Gundavali)
+- Version 1: Add metro lines, central, harbour and western local lines. Add mono rails
+
 ## Contributions
 
 This project has been commenced under the [MIT License](LICENSE). Thus, making it open source.  
