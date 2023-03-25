@@ -1,20 +1,24 @@
-import streamlit as st
-import pickle
-from script import Graph
 import os
+import pickle
+
+import streamlit as st
+from script import Graph
 
 BASE_DIR = os.getcwd()
 
 
 @st.cache(allow_output_mutation=True)
 def load_network() -> Graph:
-    with open(f"{os.path.join(os.path.join(BASE_DIR,'scripts'), 'network.pkl')}", 'rb') as f:
+    with open(
+        f"{os.path.join(os.path.join(BASE_DIR,'scripts'), 'network.pkl')}", "rb"
+    ) as f:
         network = pickle.load(f)
     return network
 
 
 st.set_page_config(page_title="BiFrost", page_icon=":train:", layout="wide")
-st.markdown("""
+st.markdown(
+    """
         <style>
                .css-18e3th9 {
                     padding-top: 2rem;
@@ -29,13 +33,15 @@ st.markdown("""
                     padding-left: 1rem;
                 }
         </style>
-        """, unsafe_allow_html=True)
-st.markdown("<h1 style='text-align: center;'>BiFrost ⚡🚆</h1>",
-            unsafe_allow_html=True)
+        """,
+    unsafe_allow_html=True,
+)
+st.markdown("<h1 style='text-align: center;'>BiFrost ⚡🚆</h1>", unsafe_allow_html=True)
 col1, col2 = st.columns(2)
 
 with col1:
-    st.markdown("""
+    st.markdown(
+        """
     ## Introduction
 
 **BiFrost** is an AI application, which gives an optimal route between two places, based on the time taken for the journey. The algorithm for path ooptimization, is A-star search algorithm. The idea behind this project is to give the user better transportation options, when travelling using public transport. For example, if a person wants to go from Point A to Point B, you have multiple options. The algorithm then calculates a path considering the time taken for the journey to get the best path.  
@@ -48,13 +54,18 @@ We did this project as a part of our bachelor's degree for the Applied AI subjec
 This project has been commenced under the [MIT License](LICENSE). Thus, making it open source.  
 The project is still in its development phases and the developer(s) are always looking for improvements. If you want to contribute to this project in any sort of, please make a pull-request with the improved code and/or documentation.  
 If you are interested in seeing the project grow, please star the project, it will be really motivating for us!
-    """)
-    st.markdown("""
-    #### [Github](https://github.com/ishandandekar/Bifrost)""")
+    """
+    )
+    st.markdown(
+        """
+    #### [Github](https://github.com/ishandandekar/Bifrost)"""
+    )
 
 with col2:
-    st.markdown("""
-    ### See the route for yourself!""")
+    st.markdown(
+        """
+    ### See the route for yourself!"""
+    )
     network = load_network()
     nodes = sorted(network.vertices_)
     start = st.selectbox("Select a start point", nodes, index=2)
@@ -66,8 +77,8 @@ with col2:
     else:
         st.success(path)
         if time_taken < 60:
-            st.info(
-                f'Time taken by this path is: {time_taken} minutes')
+            st.info(f"Time taken by this path is: {time_taken} minutes")
         else:
             st.info(
-                f"Time taken by this path is: {time_taken//60} hour(s) and {time_taken%60} minutes")
+                f"Time taken by this path is: {time_taken//60} hour(s) and {time_taken%60} minutes"
+            )
